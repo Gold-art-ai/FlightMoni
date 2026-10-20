@@ -1,64 +1,67 @@
-# DayKit
+# DayKit — Project Repository
 
-A lightweight Python toolkit for everyday routines, time utilities, and simple productivity helpers.
+This repository contains the **DayKit** Python package and a full Django demo application that uses it.
 
-## Installation
+## Repository Structure
+
+| Path | Description |
+|---|---|
+| `src/` | The `daykit` Python package (published to TestPyPI) |
+| `airportflow/` | The Django project configuration |
+| `crewlog/` | The Django app for airport movement records |
+| `tests/` | Unit tests for the `daykit` package |
+
+---
+
+## The `daykit` Package
+
+A lightweight, dependency-free Python toolkit for everyday routines, time utilities, and productivity helpers.
+
+**Install from TestPyPI:**
 
 ```bash
-pip install daykit
+pip install -i https://test.pypi.org/simple/ daykit
 ```
 
-> If the package name is already taken on PyPI, choose a unique distribution name before publishing.
-
-## Quick Start
+**Quick example:**
 
 ```python
-from daykit import (
-    good_morning,
-    good_afternoon,
-    good_evening,
-    meal_time,
-    get_greeting,
-    format_duration,
-    is_weekend,
-    percentage,
-)
+from daykit import get_greeting, format_duration, is_weekend, percentage
 
-print(good_morning("Ishara"))
-print(meal_time(12))
-print(get_greeting("Ishara", 18))
-print(format_duration(125))
-print(is_weekend())
-print(percentage(45, 60))
+print(get_greeting("Ishara", 18))  # evening greeting
+print(format_duration(125))        # "2 min 5 s"
+print(is_weekend())                # True or False for today
+print(percentage(45, 60))          # 75.0
 ```
 
-## Features
+See [`src/README.md`](src/README.md) for the full API reference.
 
-- Time-aware greetings
-- Meal-time messages
-- Human-readable duration formatting
-- Weekend detection
-- Percentage calculations
-- Simple study/productivity helpers
-- Airport flight and attendant status helpers
-- Type hints and validation
-- Small, dependency-free API
+---
 
-## Django demo: Airport Flow
+## Django Demo: Airport Flow
 
-This repository also includes a simple but meaningful Django project:
+A full-featured Django web application built on top of `daykit.airport`. It showcases:
 
-- `airportflow` is the Django project.
-- `crewlog` is the Django app for airport movement records.
-- `daykit.airport` is the homemade package module used by the Django app.
+- CRUD screens for airports, flights, gates, and crew
+- Model inheritance and a many-to-many relationship via `CrewAssignment`
+- Role-based access control using Django Groups
+- Static CSS and plain JavaScript UI
 
-The demo includes CRUD screens, multiple related tables, model inheritance, a many-to-many relationship through `CrewAssignment`, static CSS, and plain JavaScript.
+### Run the Demo
 
-Run it from this folder:
+From the repository root, with a virtual environment activated:
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
+```
+
+| Windows | macOS / Linux |
+|---|---|
+| `.venv\Scripts\activate` | `source .venv/bin/activate` |
+
+Then:
+
+```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 python manage.py migrate
@@ -66,73 +69,52 @@ python manage.py seed_airport
 python manage.py runserver
 ```
 
-Then open:
+Open <http://127.0.0.1:8000/>.
 
-```text
-http://127.0.0.1:8000/
-```
-
-Useful Django commands:
+### Admin & Roles
 
 ```bash
 python manage.py createsuperuser
 python manage.py setup_airport_roles
+```
+
+Log in at <http://127.0.0.1:8000/admin/> and assign staff users to one of these groups:
+
+| Group | Access |
+|---|---|
+| Airport Manager | Full access to all airport records |
+| Flight Dispatcher | Manage flights, gates, and crew assignments |
+| Crew Supervisor | Manage attendants and crew assignments |
+| Read Only Operations | View records without editing |
+
+Other useful commands:
+
+```bash
 python manage.py test
 python manage.py makemigrations
 ```
 
-Admin login:
+---
+
+## Development (Package)
 
 ```bash
-python manage.py createsuperuser
-python manage.py setup_airport_roles
-python manage.py runserver
-```
-
-Open `http://127.0.0.1:8000/admin/`, log in with the superuser, then create staff users and place them into one of these groups:
-
-- `Airport Manager`: full access to airport records.
-- `Flight Dispatcher`: can manage flights, gates, and crew assignments.
-- `Crew Supervisor`: can manage attendants and crew assignments.
-- `Read Only Operations`: can view airport records without editing them.
-
-## Development
-
-Clone the repository, create a virtual environment, and install the package in editable mode:
-
-```bash
-python -m venv .venv
-```
-
-Windows:
-
-```bash
-.venv\Scripts\activate
-```
-
-macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Then:
-
-```bash
-python -m pip install --upgrade pip
+cd src
 pip install -e ".[dev]"
 pytest
 ```
 
-## Build the package
+To build the distribution:
 
 ```bash
 python -m pip install build
 python -m build
 ```
 
-The generated files will appear in `dist/`.
+The wheel and source archive are written to `src/dist/`.
+
+---
 
 ## License
 
-MIT License. See `LICENSE`.
+MIT License. See [`LICENSE`](LICENSE).
