@@ -1,0 +1,586 @@
+:root {
+    --ink: #17202a;
+    --muted: #667085;
+    --soft: #eef3f8;
+    --line: #d8e0ea;
+    --paper: #f5f7fb;
+    --panel: #ffffff;
+    --blue: #125a9c;
+    --blue-dark: #0b355c;
+    --green: #16845d;
+    --amber: #9a6500;
+    --red: #b42318;
+    --teal: #12727a;
+    --shadow: 0 20px 60px rgba(19, 36, 57, .14);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 12% 8%, rgba(18, 114, 122, .16), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(196, 138, 38, .18), transparent 30%),
+        linear-gradient(180deg, #fbfcff 0%, var(--paper) 42%, #edf2f8 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+body::before {
+    background-image: linear-gradient(rgba(23, 32, 42, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 32, 42, .035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+    align-items: center;
+    backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, .86);
+    border-bottom: 1px solid rgba(216, 224, 234, .9);
+    display: grid;
+    gap: 18px;
+    grid-template-columns: auto 1fr auto;
+    padding: 14px clamp(16px, 5vw, 56px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    align-items: center;
+    color: var(--ink);
+    display: inline-flex;
+    font-size: 1.05rem;
+    font-weight: 900;
+    gap: 10px;
+}
+
+.brand-mark {
+    align-items: center;
+    background: linear-gradient(135deg, var(--blue-dark), var(--teal));
+    border-radius: 7px;
+    color: #ffffff;
+    display: inline-flex;
+    font-size: .8rem;
+    height: 36px;
+    justify-content: center;
+    width: 36px;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.nav a {
+    border-radius: 999px;
+    color: #344054;
+    font-size: .92rem;
+    font-weight: 700;
+    padding: 9px 12px;
+}
+
+.nav a:hover {
+    background: var(--soft);
+    text-decoration: none;
+}
+
+.live-clock {
+    color: var(--muted);
+    font-size: .86rem;
+    font-weight: 800;
+    text-align: right;
+}
+
+.page {
+    margin: 0 auto;
+    max-width: 1220px;
+    padding: 34px clamp(16px, 5vw, 56px) 56px;
+    position: relative;
+}
+
+.hero {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr);
+    margin-bottom: 30px;
+}
+
+.hero-dashboard {
+    align-items: stretch;
+}
+
+.hero-copy, .page-hero, .detail-hero {
+    background:
+        linear-gradient(135deg, rgba(11, 53, 92, .94), rgba(18, 114, 122, .86)),
+        url("https://i0.wp.com/thetravellingfeet.com/wp-content/uploads/2018/07/Quick-Tour-Mactan-Cebu-International-Airport-Terminal-2.jpg?fit=1068%2C560&ssl=1") center/cover;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    color: #ffffff;
+    overflow: hidden;
+    padding: clamp(24px, 5vw, 46px);
+    position: relative;
+}
+
+.hero-copy::after, .page-hero::after, .detail-hero::after {
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 999px;
+    content: "";
+    height: 260px;
+    position: absolute;
+    right: -78px;
+    top: -112px;
+    width: 260px;
+}
+
+.hero-copy h1, .page-hero h1, .detail-hero h1 {
+    font-size: clamp(2.35rem, 5vw, 4.9rem);
+    line-height: .96;
+    margin: 0;
+    max-width: 760px;
+}
+
+.lead {
+    color: rgba(255, 255, 255, .82);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    max-width: 650px;
+}
+
+.eyebrow {
+    color: #a7f3d0;
+    font-size: .76rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+}
+
+.hero-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0;
+}
+
+.hero-metrics span {
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, .9);
+    padding: 9px 13px;
+}
+
+.hero-metrics strong {
+    color: #ffffff;
+    margin-right: 4px;
+}
+
+.hero-visual {
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    min-height: 430px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-visual img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.hero-visual::after {
+    background: linear-gradient(180deg, transparent 20%, rgba(7, 20, 35, .7));
+    content: "";
+    inset: 0;
+    position: absolute;
+}
+
+.glass-card {
+    align-items: center;
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, .18);
+    border: 1px solid rgba(255, 255, 255, .34);
+    border-radius: 14px;
+    bottom: 18px;
+    color: #ffffff;
+    display: flex;
+    gap: 12px;
+    left: 18px;
+    padding: 14px;
+    position: absolute;
+    right: 18px;
+    z-index: 1;
+}
+
+.glass-card p {
+    color: rgba(255, 255, 255, .82);
+    margin: 3px 0 0;
+}
+
+.pulse {
+    background: #37d67a;
+    border-radius: 999px;
+    box-shadow: 0 0 0 8px rgba(55, 214, 122, .18);
+    flex: 0 0 auto;
+    height: 12px;
+    width: 12px;
+}
+
+.mini-hero {
+    align-items: end;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    min-height: 260px;
+}
+
+.flight-hero {
+    background:
+        linear-gradient(135deg, rgba(11, 53, 92, .9), rgba(11, 53, 92, .28)),
+        url("https://image.reiseliv1.no/1362836.webp?format=jpg&height=644&imageId=1362836&width=960") center/cover;
+}
+
+.crew-hero {
+    background:
+        linear-gradient(135deg, rgba(11, 53, 92, .88), rgba(18, 114, 122, .32)),
+        url("https://dubaistartupsdaily.com/assets/img/news/flydubai_cabin_crew_hiring.webp") center/cover;
+}
+
+.assignment-hero {
+    background:
+        linear-gradient(135deg, rgba(11, 53, 92, .9), rgba(154, 101, 0, .34)),
+        url("https://d3bha1wm78wgdv.cloudfront.net/strapi-media/iberia_airlines_cabin_crew_714e0a7fa6.webp") center/cover;
+}
+
+.detail-hero {
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    min-height: 250px;
+}
+
+.detail-hero p {
+    color: rgba(255, 255, 255, .84);
+}
+
+.section-head {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.section-head h2 {
+    font-size: 1.15rem;
+    margin: 0;
+}
+
+.actions, .card-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.button, button {
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, .64);
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgba(12, 37, 65, .16);
+    color: var(--blue-dark);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: 900;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 15px;
+}
+
+.button:hover, button:hover {
+    text-decoration: none;
+    filter: brightness(.98);
+}
+
+.button.secondary {
+    background: rgba(255, 255, 255, .14);
+    color: #ffffff;
+}
+
+.section-head .button,
+.search button,
+.form-shell .button,
+.table-wrap .button {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #ffffff;
+}
+
+.danger-button {
+    background: var(--red);
+    border-color: var(--red);
+    color: #ffffff;
+}
+
+.split {
+    align-items: start;
+    display: grid;
+    gap: 22px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.list {
+    display: grid;
+    gap: 12px;
+}
+
+.row-card, .person-card, .panel, .form-shell, .table-wrap {
+    background: rgba(255, 255, 255, .9);
+    border: 1px solid rgba(216, 224, 234, .9);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(19, 36, 57, .07);
+}
+
+.row-card {
+    align-items: center;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.row-card h3, .person-card h2 {
+    font-size: 1rem;
+    margin: 0 0 4px;
+}
+
+.row-card p, .person-card p, p, td span {
+    color: var(--muted);
+}
+
+.person-card, .panel, .form-shell {
+    padding: 20px;
+}
+
+.linked-card {
+    color: inherit;
+}
+
+.linked-card:hover {
+    text-decoration: none;
+}
+
+.row-card, .person-card {
+    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.row-card:hover, .person-card:hover {
+    background: #ffffff;
+    border-color: #98b9d6;
+    box-shadow: 0 12px 30px rgba(19, 36, 57, .1);
+}
+
+.cards {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.person-card {
+    min-height: 178px;
+}
+
+.pill {
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: .78rem;
+    font-weight: 900;
+    justify-content: center;
+    min-width: 96px;
+    padding: 7px 10px;
+    white-space: nowrap;
+}
+
+.success { background: #e6f6ef; color: var(--green); }
+.warning { background: #fff4d7; color: var(--amber); }
+.danger { background: #ffe9e7; color: var(--red); }
+.muted, .neutral { background: #edf1f6; color: #415166; }
+
+.quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.quick-links a {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    font-weight: 800;
+    padding: 10px 14px;
+}
+
+.quick-links a:hover {
+    background: var(--soft);
+    text-decoration: none;
+}
+
+.search {
+    background: rgba(255, 255, 255, .86);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr auto;
+    margin-bottom: 16px;
+    padding: 10px;
+}
+
+input, select, textarea {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    font: inherit;
+    min-height: 44px;
+    padding: 10px 12px;
+    width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #8bb3d4;
+    box-shadow: 0 0 0 4px rgba(18, 90, 156, .12);
+    outline: 0;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 760px;
+    width: 100%;
+}
+
+th, td {
+    border-bottom: 1px solid var(--line);
+    padding: 15px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    color: #475467;
+    font-size: .76rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+tbody tr {
+    transition: background 140ms ease;
+}
+
+tbody tr:hover {
+    background: #f8fbff;
+}
+
+tr:last-child td {
+    border-bottom: 0;
+}
+
+.right {
+    text-align: right;
+}
+
+.record-form {
+    display: grid;
+    gap: 14px;
+    max-width: 760px;
+}
+
+.record-form p {
+    display: grid;
+    gap: 7px;
+    margin: 0;
+}
+
+.record-form label {
+    color: #344054;
+    font-weight: 900;
+}
+
+.helptext {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+.empty {
+    background: #ffffff;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    padding: 18px;
+}
+
+@media (max-width: 900px) {
+    .topbar {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        justify-content: flex-start;
+    }
+
+    .live-clock {
+        text-align: left;
+    }
+
+    .hero, .split {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+        min-height: 330px;
+    }
+}
+
+@media (max-width: 680px) {
+    .page {
+        padding-top: 22px;
+    }
+
+    .mini-hero, .detail-hero, .row-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero-copy h1, .page-hero h1, .detail-hero h1 {
+        font-size: 2.35rem;
+    }
+
+    .search {
+        grid-template-columns: 1fr;
+    }
+
+    .button, button {
+        width: 100%;
+    }
+}

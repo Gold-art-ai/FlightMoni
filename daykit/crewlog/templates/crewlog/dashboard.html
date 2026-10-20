@@ -1,0 +1,77 @@
+{% extends "crewlog/base.html" %}
+{% block title %}Dashboard - Airport Flow{% endblock %}
+{% block content %}
+<section class="hero hero-dashboard">
+    <div class="hero-copy">
+        <p class="eyebrow">Flight attendant circulation</p>
+        <h1>Track who is moving in and out of each flight.</h1>
+        <p class="lead">A compact operations desk for gates, crew check-ins, assignments, and arrival or departure movement signals.</p>
+        <div class="hero-metrics">
+            <span><strong>{{ departures }}</strong> Departures</span>
+            <span><strong>{{ arrivals }}</strong> Arrivals</span>
+            <span><strong>{{ open_assignments }}</strong> Open check-ins</span>
+        </div>
+        <div class="actions">
+            <a class="button" href="{% url 'crewlog:flight_create' %}">New flight</a>
+            <a class="button secondary" href="{% url 'crewlog:attendant_create' %}">New attendant</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <img src="https://image.reiseliv1.no/1362836.webp?format=jpg&height=644&imageId=1362836&width=960" alt="Flight attendants walking through a modern airport terminal">
+        <div class="glass-card">
+            <span class="pulse"></span>
+            <div>
+                <strong>Live movement desk</strong>
+                <p>Gate, crew, and flight readiness in one place.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="split">
+    <div>
+        <div class="section-head">
+            <h2>Next movements</h2>
+            <a href="{% url 'crewlog:flight_list' %}">View all</a>
+        </div>
+        <div class="list">
+            {% for flight in flights %}
+                <a class="row-card linked-card" href="{{ flight.get_absolute_url }}">
+                    <div>
+                        <h3>{{ flight.flight_number }} - {{ flight.airline }}</h3>
+                        <p>{{ flight.origin }} to {{ flight.destination }} at {{ flight.scheduled_time|date:"M j, H:i" }}</p>
+                    </div>
+                    <span class="pill {{ flight.signal.css_class }}">{{ flight.signal.label }}</span>
+                </a>
+            {% empty %}
+                <p class="empty">No flights yet. Add one to start the board.</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <div class="section-head">
+            <h2>Roster load</h2>
+            <a href="{% url 'crewlog:attendant_list' %}">View all</a>
+        </div>
+        <div class="list">
+            {% for attendant in attendants %}
+                <a class="row-card linked-card" href="{{ attendant.get_absolute_url }}">
+                    <div>
+                        <h3>{{ attendant.full_name }}</h3>
+                        <p>{{ attendant.get_rank_display }} - {{ attendant.languages }}</p>
+                    </div>
+                    <span class="pill neutral">{{ attendant.roster_label }}</span>
+                </a>
+            {% empty %}
+                <p class="empty">No attendants yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="quick-links">
+    <a href="{% url 'crewlog:terminal_create' %}">Add terminal</a>
+    <a href="{% url 'crewlog:gate_create' %}">Add gate</a>
+    <a href="{% url 'crewlog:assignment_create' %}">Assign crew</a>
+</section>
+{% endblock %}

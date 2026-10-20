@@ -1,0 +1,15 @@
+{% extends "crewlog/base.html" %}
+{% block title %}Delete - Airport Flow{% endblock %}
+{% block content %}
+<section class="form-shell">
+    <h1>Delete record</h1>
+    <p>Are you sure you want to delete {{ object }}?</p>
+    <form method="post" class="record-form">
+        {% csrf_token %}
+        <div class="actions">
+            <button class="button danger-button" type="submit">Delete</button>
+            <a class="button secondary" href="{% url 'crewlog:dashboard' %}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

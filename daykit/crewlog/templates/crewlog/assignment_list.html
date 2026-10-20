@@ -1,0 +1,39 @@
+{% extends "crewlog/base.html" %}
+{% block title %}Assignments - Airport Flow{% endblock %}
+{% block content %}
+<section class="page-hero mini-hero assignment-hero">
+    <div>
+        <p class="eyebrow">Roster</p>
+        <h1>Crew assignments</h1>
+        <p class="lead">Match attendants to duties and keep check-ins visible before departure.</p>
+    </div>
+    <a class="button" href="{% url 'crewlog:assignment_create' %}">Assign crew</a>
+</section>
+
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Flight</th>
+                <th>Attendant</th>
+                <th>Duty</th>
+                <th>Check-in</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+                <tr>
+                    <td>{{ assignment.flight.flight_number }}</td>
+                    <td>{{ assignment.attendant.full_name }}</td>
+                    <td>{{ assignment.get_duty_display }}</td>
+                    <td>{% if assignment.checked_in %}Done{% else %}Waiting{% endif %}</td>
+                    <td class="right"><a href="{% url 'crewlog:assignment_update' assignment.pk %}">Edit</a></td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5">No assignments yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

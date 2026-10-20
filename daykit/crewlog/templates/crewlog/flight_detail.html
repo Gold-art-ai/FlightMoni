@@ -1,0 +1,36 @@
+{% extends "crewlog/base.html" %}
+{% block title %}{{ object.flight_number }} - Airport Flow{% endblock %}
+{% block content %}
+<section class="detail-hero">
+    <div>
+        <p class="eyebrow">{{ object.get_direction_display }}</p>
+        <h1>{{ object.flight_number }} - {{ object.airline }}</h1>
+        <p>{{ object.origin }} to {{ object.destination }} - {{ object.gate }}</p>
+        <span class="pill {{ object.signal.css_class }}">{{ object.signal.label }}</span>
+    </div>
+    <div class="actions">
+        <a class="button secondary" href="{% url 'crewlog:flight_update' object.pk %}">Edit</a>
+        <a class="button danger-button" href="{% url 'crewlog:flight_delete' object.pk %}">Delete</a>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Crew assignments</h2>
+    <div class="list">
+        {% for assignment in object.assignments.all %}
+            <article class="row-card">
+                <div>
+                    <h3>{{ assignment.attendant.full_name }}</h3>
+                    <p>{{ assignment.get_duty_display }} duty</p>
+                </div>
+                <span class="pill {% if assignment.checked_in %}success{% else %}warning{% endif %}">
+                    {% if assignment.checked_in %}Checked in{% else %}Waiting{% endif %}
+                </span>
+            </article>
+        {% empty %}
+            <p class="empty">No crew assigned yet.</p>
+        {% endfor %}
+    </div>
+    <a class="button" href="{% url 'crewlog:assignment_create' %}">Assign crew</a>
+</section>
+{% endblock %}

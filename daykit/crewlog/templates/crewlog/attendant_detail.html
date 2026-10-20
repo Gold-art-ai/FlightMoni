@@ -1,0 +1,33 @@
+{% extends "crewlog/base.html" %}
+{% block title %}{{ object.full_name }} - Airport Flow{% endblock %}
+{% block content %}
+<section class="detail-hero">
+    <div>
+        <p class="eyebrow">{{ object.employee_id }}</p>
+        <h1>{{ object.full_name }}</h1>
+        <p>{{ object.email }} - {{ object.languages }}</p>
+        <span class="pill neutral">{{ object.roster_label }}</span>
+    </div>
+    <div class="actions">
+        <a class="button secondary" href="{% url 'crewlog:attendant_update' object.pk %}">Edit</a>
+        <a class="button danger-button" href="{% url 'crewlog:attendant_delete' object.pk %}">Delete</a>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Assigned flights</h2>
+    <div class="list">
+        {% for assignment in object.assignments.all %}
+            <article class="row-card">
+                <div>
+                    <h3>{{ assignment.flight.flight_number }}</h3>
+                    <p>{{ assignment.flight.origin }} to {{ assignment.flight.destination }}</p>
+                </div>
+                <span class="pill neutral">{{ assignment.get_duty_display }}</span>
+            </article>
+        {% empty %}
+            <p class="empty">No flights assigned.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "crewlog/base.html" %}
+{% block title %}Attendants - Airport Flow{% endblock %}
+{% block content %}
+<section class="page-hero mini-hero crew-hero">
+    <div>
+        <p class="eyebrow">People</p>
+        <h1>Flight attendants</h1>
+        <p class="lead">See roster pressure, language coverage, and crew member assignments.</p>
+    </div>
+    <a class="button" href="{% url 'crewlog:attendant_create' %}">New attendant</a>
+</section>
+
+<div class="cards">
+    {% for attendant in attendants %}
+        <article class="person-card">
+            <h2><a href="{{ attendant.get_absolute_url }}">{{ attendant.full_name }}</a></h2>
+            <p>{{ attendant.employee_id }} - {{ attendant.get_rank_display }}</p>
+            <p>{{ attendant.languages }}</p>
+            <div class="card-actions">
+                <span class="pill neutral">{{ attendant.roster_label }}</span>
+                <a href="{% url 'crewlog:attendant_update' attendant.pk %}">Edit</a>
+            </div>
+        </article>
+    {% empty %}
+        <p class="empty">No attendants yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

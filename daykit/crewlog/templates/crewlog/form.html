@@ -1,0 +1,15 @@
+{% extends "crewlog/base.html" %}
+{% block title %}Form - Airport Flow{% endblock %}
+{% block content %}
+<section class="form-shell">
+    <h1>{{ page_title|default:"Record" }}</h1>
+    <form method="post" class="record-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button class="button" type="submit">Save</button>
+            <a class="button secondary" href="{% url 'crewlog:dashboard' %}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
